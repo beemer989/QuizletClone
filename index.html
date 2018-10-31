@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quizlet Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="main.css" rel="stylesheet"/>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="menubar" class="menubar">
+        <div id="switch" class="options" onclick="switchSides();">
+            Switch
+        </div>
+        <div id="add" class="options" onclick="storeCard()">
+            Add Card
+        </div>
+        <div id="cardView" class="options"> 
+            <div id="cards" onclick="showCards()">
+                Cards
+            </div>
+            <div id="cardChange" class="change">
+                <div id="prevCard" class="direction" onclick="prevCard()">
+                    Prev
+                </div>
+                <div id="nextCard" class="direction" onclick="nextCard()">
+                    Next
+                </div>
+            </div>
+        </div>
+        <div id="learnView" class="options"> 
+            <div id="learn" onclick="learnCards()">
+                Learn
+            </div>
+            <div id="cardChange" class="change">
+                <div id="prevLearn" class="direction" onclick="prevLearn()">
+                    Prev
+                </div>
+                <div id="nextLearn" class="direction" onclick="nextLearn()">
+                    Next
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="termTitle" class="termTxt" onclick="chooseSide('term')">
+        Term
+    </div>
+    <div id="term" class="term">
+        <textarea id="currTerm" cols="46" rows="24" onclick="setToStart('currTerm');">
+        </textarea>
+    </div>
+    <div id="defTitle" class="defTxt" onclick="chooseSide('def')">
+        Definition
+    </div>
+    <div id="definition" class="definition">
+        <textarea id="currDef" cols="46" rows="24" onclick="setToStart('currDef');">
+        </textarea>
+    </div>
+    <!-- <button onclick="switchSides();"" style="bottom: 0px; left:0px;" > -->
+       
+   
+    
+    
+    
+</body>
+</html>

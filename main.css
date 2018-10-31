@@ -1,0 +1,110 @@
+body {
+  background-color: black;
+}
+
+input {
+  overflow: auto;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.menubar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: green;
+  height: 50px;
+  width: 100%;
+}
+
+.options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: white;
+  height: 40px;
+  width: 120px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.change {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.direction {
+  border: 2.5px #0084ff solid;
+  border-radius: 5px;
+}
+
+.term {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  background-color: antiquewhite;
+  height: 375px;
+  width: 391px;
+  border: green 2.5px solid;
+}
+
+.definition {
+  position: absolute;
+  top: 100px;
+  left: 391px;
+  background-color: antiquewhite;
+  height: 375px;
+  width: 391px;
+  border: green 2.5px solid;
+}
+
+.termTxt {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  background-color: white;
+  height: 50px;
+  width: 391px;
+  border: green 2.5px solid;
+  text-align: center;
+}
+
+.defTxt {
+  position: absolute;
+  top: 50px;
+  left: 391px;
+  background-color: white;
+  height: 50px;
+  width: 391px;
+  border: green 2.5px solid;
+  text-align: center;
+}
+/*# sourceMappingURL=main.css.map */

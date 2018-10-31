@@ -1,0 +1,4 @@
+{"term":"Problem Domain","definition":"Special problem area (ex. medicine, finance, or science) that an expert can solve problems in very well","_id":"0mbFqEdKF8bIyaGE"}
+{"term":"Explanation Facility","definition":"Allows the system's reasoning to be checked. Elaborate systems allow users to explore what-if statements","_id":"Ton4s3tZoyff8O00"}
+{"term":"Advantages of an Expert System","definition":"1. Increases availability of expertise\n2. Reduced cost in getting expertise \n3. Permenence (human experts can die)\n4. Multiple expertise (knowledge from multiple experts)\n5. Increased reliability\n6. Clear explanations \n7. Fast responses\n8. Unemotional \n9. Can act as an intelligent tutor \n10. Can access databases intelligently","_id":"YFcL1Hz3OEUiUbWJ"}
+{"term":"Basic Functions of an Expert System","definition":"The user supplies facts to the system and it responds by giving expert advice","_id":"zZ11DaVH6wZoTGiC"}

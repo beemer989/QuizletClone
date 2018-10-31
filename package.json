@@ -1,0 +1,17 @@
+{
+  "name": "quizClone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack:win32": "electron-packager . --overwrite --platform=darwin --arch=x64"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron-packager": "^12.2.0",
+    "nedb": "^1.8.0"
+  }
+}
