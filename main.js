@@ -1,4 +1,4 @@
-const Datastore = require('nedb'), db = new Datastore({filename: 'cards.db', autoload: true})
+const Datastore = require('nedb'), db = new Datastore({filename: './db/cards.db', autoload: true})
 
 var addCardFlag = 1;
 var showCardFlag = 0;
