@@ -20,6 +20,17 @@ var ids = [];
 var terms = [];
 var definitions = [];
 
+db.find({}, function (err, docs) {
+    console.log(docs);
+    for(var i = 0; i < docs.length; ++i)
+    {
+        ids.push(docs[i]._id);
+        terms.push(docs[i].term);
+        definitions.push(docs[i].definition);
+    }
+});
+
+
 
 function setToStart(field) {
     if(field == "currTerm")
@@ -27,10 +38,15 @@ function setToStart(field) {
         document.getElementById("currTerm").setSelectionRange(0,0);
         document.getElementById("currTerm").value = "";
     }
-    else
+    else if(field == "currDef")
     {
         document.getElementById("currDef").setSelectionRange(0,0);
         document.getElementById("currDef").value = "";
+    }
+    else if(field == "defLearn")
+    {
+        document.getElementById("defLearn").setSelectionRange(0,0);
+        document.getElementById("defLearn").value = "";
     }
 }
 
@@ -53,6 +69,8 @@ function storeCard () {
         db.insert(notecard, function (err, newDoc) {
             console.log(newDoc);
         });
+        document.getElementById("currTerm").value = "";
+        document.getElementById("currDef").value = "";
     }
 }
 
@@ -84,35 +102,18 @@ function chooseSide(side) {
     }
     if(learnCardFlag == 1)
     {
-        switch (side) {
-            case "term":
-                console.log(document.getElementById("term").innerHTML);
-                if (document.getElementById("term").innerHTML.includes("<p id=\"termKnown\">")) {
-                    document.getElementById("term").innerHTML = "<textarea id=\"termLearn\" cols=\"46\" rows=\"20\"> </textarea> <button onclick=\"checkAnswer('term')\"> Check Answer </button>";
-                    document.getElementById("prevCard").click();
-                    document.getElementById("nextCard").click();
-                } else {
-                    document.getElementById("term").innerHTML = "<p id=\"termKnown\"></p>";
-                }
-                
-                break;
-    
-            case "def":
-                console.log("DEF SELECTED");
-                if (document.getElementById("definition").innerHTML.includes("<p id=\"defKnown\">")) {
-                    document.getElementById("definition").innerHTML = "<textarea id=\"defLearn\" cols=\"46\" rows=\"20\"> </textarea> <button onclick=\"checkAnswer('def')\"> Check Answer </button>";
-                    document.getElementById("prevCard").click();
-                    document.getElementById("nextCard").click();
-                } else {
-                    document.getElementById("definition").innerHTML = "<p id=\"defKnown\"></p>";
-                }
-                break;
-        
-            default:
-                break;
-        }
+        if(side == "def")
+        {
+            console.log("DEF SELECTED");
+            if (document.getElementById("definition").innerHTML.includes("<p id=\"defKnown\">")) {
+                document.getElementById("definition").innerHTML = "<textarea id=\"defLearn\" cols=\"46\" rows=\"20\" onclick=\"setToStart(\"defLearn\")\"> </textarea> <button onclick=\"checkAnswer('def')\"> Check Answer </button>";
+                document.getElementById("prevCard").click();
+                document.getElementById("nextCard").click();
+            } else {
+                document.getElementById("definition").innerHTML = "<p id=\"defKnown\"></p>";
+            }
+        }  
     }
-    
 }
 
 function showCards () {
@@ -122,19 +123,9 @@ function showCards () {
     addCardFlag = 0;
     showCardFlag = 1;
     learnCardFlag = 0;
-
-    terms = [];
-    db.find({}, function (err, docs) {
-        console.log(docs);
-        for(var i = 0; i < docs.length; ++i)
-        {
-            ids.push(docs[i]._id);
-            terms.push(docs[i].term);
-            definitions.push(docs[i].definition);
-        }
-        document.getElementById("termCards").innerHTML = terms[0];
-        document.getElementById("defCards").innerHTML = definitions[0];
-    });
+    document.getElementById("termCards").innerHTML = terms[0];
+    document.getElementById("defCards").innerHTML = definitions[0];
+    
 }
 
 function nextCard() {
@@ -183,35 +174,15 @@ function nextLearn() {
 }
 
 function advanceCorrect(side) {
-    switch (side) {
-        case "term":
-            console.log("advancing from term!");
-            currCardIndex = terms.indexOf(document.getElementById("defKnown").innerHTML);
-            if(currCardIndex != terms.length - 1)
-            {
-                document.getElementById("defKnown").innerHTML = definitions[currCardIndex + 1];
-            }
-            else
-            {
-                document.getElementById("defKnown").innerHTML = definitions[0];
-            }
-            break;
-    
-        case "def":
-            console.log("advancing from def!");
-            currCardIndex = terms.indexOf(document.getElementById("termKnown").innerHTML);
-            if(currCardIndex != terms.length - 1)
-            {
-                document.getElementById("termKnown").innerHTML = terms[currCardIndex + 1];
-            }
-            else
-            {
-                document.getElementById("termKnown").innerHTML = terms[0];
-            }
-            break;
-
-        default:
-            break;
+    console.log("advancing from def!");
+    currCardIndex = terms.indexOf(document.getElementById("termKnown").innerHTML);
+    if(currCardIndex != terms.length - 1)
+    {
+        document.getElementById("termKnown").innerHTML = terms[currCardIndex + 1];
+    }
+    else
+    {
+        document.getElementById("termKnown").innerHTML = terms[0];
     }
 }
 
@@ -237,18 +208,9 @@ function learnCards() {
     addCardFlag = 0;
     showCardFlag = 0;
     learnCardFlag = 1;
-
-    terms = [];
-    db.find({}, function (err, docs) {
-        console.log(docs);
-        for(var i = 0; i < docs.length; ++i)
-        {
-            terms.push(docs[i].term);
-            definitions.push(docs[i].definition)
-        }
-        document.getElementById("termKnown").innerHTML = terms[0];
-        document.getElementById("defKnown").innerHTML = definitions[0];
-    });
+    document.getElementById("termKnown").innerHTML = terms[0];
+    document.getElementById("defKnown").innerHTML = definitions[0];
+    
 }
 
 function checkAnswer(side) {
@@ -290,28 +252,16 @@ function checkAnswer(side) {
 }
 
 function switchSides() {
-    for(var i = 0; i < ids.length - 1; ++i)
-    {
-        db.update({ _id: ids[i]}, { $set: { term: definitions[i], definition: terms[i] } }, { multi: true }, function (err, numReplaced) {
-            console.log(numReplaced);
-            console.log(err);
-            // numReplaced = 3
-            // Field 'system' on Mars, Earth, Jupiter now has value 'solar system'
-          });
-    }
-    ids = [];
-    terms = [];
-    definitions = [];
-    db.find({}, function (err, docs) {
-        // console.log(docs);
-        for(var i = 0; i < docs.length; ++i)
-        {
-            ids.push(docs[i]._id);
-            terms.push(docs[i].term);
-            definitions.push(docs[i].definition);
-        }
-        console.log(ids);
-        console.log(terms);
-        console.log(definitions);
+    db.remove({}, { multi: true }, function (err, numRemoved) {
     });
+    for(var i = terms.length - 1; i >= 0; --i)
+    {
+        var notecard = {
+            term: definitions[i],
+            definition: terms[i]
+        };
+        db.insert(notecard, function (err, newDoc) {
+            console.log(newDoc);
+        });
+    }
 }
